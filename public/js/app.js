@@ -2083,9 +2083,6 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     ColinaComponent: _ColinaComponent_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     ContryComponent: _ContryComponent_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
-  },
-  mounted: function mounted() {
-    console.log('Component mounted.');
   }
 });
 
@@ -2100,95 +2097,18 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
+
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _iterableToArray(iter) { if (typeof Symbol !== "undefined" && iter[Symbol.iterator] != null || iter["@@iterator"] != null) return Array.from(iter); }
+
+function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToArray(arr); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
 //
 //
 //
@@ -2367,12 +2287,16 @@ __webpack_require__.r(__webpack_exports__);
       allColumns: true,
       modal: false,
       columns: [],
+      columnsLoad: [],
       dateRules: [function (v) {
         return Array.isArray(v) && v.length > 1 || 'El rango de fechas es requerido';
       }]
     };
   },
   computed: {
+    /**
+     * Se encarga de las reglas de los checkbox
+     */
     columnsRules: function columnsRules() {
       var _this = this;
 
@@ -2398,15 +2322,49 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   methods: {
+    /**
+     * Valida que el formulario este ok y envia los datos
+     */
     validate: function validate() {
-      this.$refs.form.validate();
+      if (this.$refs.form.validate()) {
+        axios.post('/excelDownload', {
+          date: this.date,
+          allColumns: this.allColumns,
+          columns: this.columns
+        }).then(function (response) {
+          console.log(response);
+        })["catch"](function (error) {
+          console.log(error);
+        });
+      }
     },
+
+    /**
+     *  Cuando el checkbox todos los campos sea false se ejecuta
+     *  Limpiando el panel y el arreglo
+     */
     checkAllColumn: function checkAllColumn() {
       if (this.allColumns != !this.allColumns) {
         this.panel = [];
         this.columns = [];
       }
+    },
+
+    /**
+     *  Realiza la carga de las columnas en el panel
+     */
+    loadAllColumns: function loadAllColumns() {
+      var _this2 = this;
+
+      axios.get('/loadColumns').then(function (response) {
+        _toConsumableArray(_this2.columnsLoad = response.data);
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
+  },
+  mounted: function mounted() {
+    this.loadAllColumns();
   }
 });
 
@@ -39494,17 +39452,7 @@ var render = function() {
                     ],
                     1
                   ),
-                  _vm._v(
-                    "\n                    " +
-                      _vm._s(_vm.date) +
-                      "\n                    " +
-                      _vm._s(_vm.allColumns) +
-                      "\n                    " +
-                      _vm._s(_vm.columns) +
-                      "\n                    " +
-                      _vm._s(_vm.valid) +
-                      "\n                "
-                  ),
+                  _vm._v(" "),
                   _c(
                     "v-container",
                     { staticClass: "py-0 mt-n5" },
@@ -39575,10 +39523,11 @@ var render = function() {
                                 [
                                   _c(
                                     "v-row",
-                                    [
-                                      _c(
+                                    _vm._l(_vm.columnsLoad, function(column) {
+                                      return _c(
                                         "v-col",
                                         {
+                                          key: column,
                                           attrs: {
                                             cols: "12",
                                             sm: "4",
@@ -39589,272 +39538,36 @@ var render = function() {
                                           _c("v-checkbox", {
                                             attrs: {
                                               color: "info",
-                                              value: "code",
+                                              value: column,
                                               rules: _vm.columnsRules
                                             },
-                                            scopedSlots: _vm._u([
-                                              {
-                                                key: "label",
-                                                fn: function() {
-                                                  return [
-                                                    _c(
-                                                      "div",
-                                                      {
-                                                        staticClass: "caption"
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                                                    Código\n                                                "
-                                                        )
-                                                      ]
-                                                    )
-                                                  ]
-                                                },
-                                                proxy: true
-                                              }
-                                            ]),
-                                            model: {
-                                              value: _vm.columns,
-                                              callback: function($$v) {
-                                                _vm.columns = $$v
-                                              },
-                                              expression: "columns"
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _c("v-checkbox", {
-                                            attrs: {
-                                              color: "info",
-                                              value: "dateCol",
-                                              rules: _vm.columnsRules
-                                            },
-                                            scopedSlots: _vm._u([
-                                              {
-                                                key: "label",
-                                                fn: function() {
-                                                  return [
-                                                    _c(
-                                                      "div",
-                                                      {
-                                                        staticClass: "caption"
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                                                    Fecha\n                                                "
-                                                        )
-                                                      ]
-                                                    )
-                                                  ]
-                                                },
-                                                proxy: true
-                                              }
-                                            ]),
-                                            model: {
-                                              value: _vm.columns,
-                                              callback: function($$v) {
-                                                _vm.columns = $$v
-                                              },
-                                              expression: "columns"
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _c("v-checkbox", {
-                                            attrs: {
-                                              color: "info",
-                                              value: "phone",
-                                              rules: _vm.columnsRules
-                                            },
-                                            scopedSlots: _vm._u([
-                                              {
-                                                key: "label",
-                                                fn: function() {
-                                                  return [
-                                                    _c(
-                                                      "div",
-                                                      {
-                                                        staticClass: "caption"
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                                                    Teléfono\n                                                "
-                                                        )
-                                                      ]
-                                                    )
-                                                  ]
-                                                },
-                                                proxy: true
-                                              }
-                                            ]),
-                                            model: {
-                                              value: _vm.columns,
-                                              callback: function($$v) {
-                                                _vm.columns = $$v
-                                              },
-                                              expression: "columns"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-col",
-                                        {
-                                          attrs: {
-                                            cols: "12",
-                                            sm: "4",
-                                            md: "4"
-                                          }
-                                        },
-                                        [
-                                          _c("v-checkbox", {
-                                            attrs: {
-                                              color: "info",
-                                              value: "question1",
-                                              rules: _vm.columnsRules
-                                            },
-                                            scopedSlots: _vm._u([
-                                              {
-                                                key: "label",
-                                                fn: function() {
-                                                  return [
-                                                    _c(
-                                                      "div",
-                                                      {
-                                                        staticClass: "caption"
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                                                    Pregunta 1\n                                                "
-                                                        )
-                                                      ]
-                                                    )
-                                                  ]
-                                                },
-                                                proxy: true
-                                              }
-                                            ]),
-                                            model: {
-                                              value: _vm.columns,
-                                              callback: function($$v) {
-                                                _vm.columns = $$v
-                                              },
-                                              expression: "columns"
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _c("v-checkbox", {
-                                            attrs: {
-                                              color: "info",
-                                              value: "question2",
-                                              rules: _vm.columnsRules
-                                            },
-                                            scopedSlots: _vm._u([
-                                              {
-                                                key: "label",
-                                                fn: function() {
-                                                  return [
-                                                    _c(
-                                                      "div",
-                                                      {
-                                                        staticClass: "caption"
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                                                    Pregunta 2\n                                                "
-                                                        )
-                                                      ]
-                                                    )
-                                                  ]
-                                                },
-                                                proxy: true
-                                              }
-                                            ]),
-                                            model: {
-                                              value: _vm.columns,
-                                              callback: function($$v) {
-                                                _vm.columns = $$v
-                                              },
-                                              expression: "columns"
-                                            }
-                                          })
-                                        ],
-                                        1
-                                      ),
-                                      _vm._v(" "),
-                                      _c(
-                                        "v-col",
-                                        {
-                                          attrs: {
-                                            cols: "12",
-                                            sm: "4",
-                                            md: "4"
-                                          }
-                                        },
-                                        [
-                                          _c("v-checkbox", {
-                                            attrs: {
-                                              color: "info",
-                                              value: "question3",
-                                              rules: _vm.columnsRules
-                                            },
-                                            scopedSlots: _vm._u([
-                                              {
-                                                key: "label",
-                                                fn: function() {
-                                                  return [
-                                                    _c(
-                                                      "div",
-                                                      {
-                                                        staticClass: "caption"
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                                                    Pregunta 3\n                                                "
-                                                        )
-                                                      ]
-                                                    )
-                                                  ]
-                                                },
-                                                proxy: true
-                                              }
-                                            ]),
-                                            model: {
-                                              value: _vm.columns,
-                                              callback: function($$v) {
-                                                _vm.columns = $$v
-                                              },
-                                              expression: "columns"
-                                            }
-                                          }),
-                                          _vm._v(" "),
-                                          _c("v-checkbox", {
-                                            attrs: {
-                                              color: "info",
-                                              value: "registerCode",
-                                              rules: _vm.columnsRules
-                                            },
-                                            scopedSlots: _vm._u([
-                                              {
-                                                key: "label",
-                                                fn: function() {
-                                                  return [
-                                                    _c(
-                                                      "div",
-                                                      {
-                                                        staticClass: "caption"
-                                                      },
-                                                      [
-                                                        _vm._v(
-                                                          "\n                                                    Código registro\n                                                "
-                                                        )
-                                                      ]
-                                                    )
-                                                  ]
-                                                },
-                                                proxy: true
-                                              }
-                                            ]),
+                                            scopedSlots: _vm._u(
+                                              [
+                                                {
+                                                  key: "label",
+                                                  fn: function() {
+                                                    return [
+                                                      _c(
+                                                        "div",
+                                                        {
+                                                          staticClass: "caption"
+                                                        },
+                                                        [
+                                                          _vm._v(
+                                                            "\n                                                    " +
+                                                              _vm._s(column) +
+                                                              "\n                                                "
+                                                          )
+                                                        ]
+                                                      )
+                                                    ]
+                                                  },
+                                                  proxy: true
+                                                }
+                                              ],
+                                              null,
+                                              true
+                                            ),
                                             model: {
                                               value: _vm.columns,
                                               callback: function($$v) {
@@ -39866,7 +39579,7 @@ var render = function() {
                                         ],
                                         1
                                       )
-                                    ],
+                                    }),
                                     1
                                   )
                                 ],

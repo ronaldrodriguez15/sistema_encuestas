@@ -90,10 +90,6 @@
             ColinaComponent,
             ContryComponent
         },
-
-        mounted() {
-            console.log('Component mounted.')
-        }
     }
 </script>
 

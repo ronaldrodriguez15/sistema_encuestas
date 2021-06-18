@@ -84,10 +84,7 @@
 
                         </v-dialog>
                     </v-col>
-                        {{ date }}
-                        {{ allColumns }}
-                        {{ columns }}
-                        {{ valid }}
+                    
                     <v-container class="py-0 mt-n5">
                         <v-checkbox 
                             v-model="allColumns"
@@ -123,104 +120,18 @@
                                             cols="12"
                                             sm="4"
                                             md="4"
+                                            v-for="column in columnsLoad"
+                                            :key="column"
                                         >
-                                            <v-checkbox
-                                                color="info"
-                                                v-model="columns"
-                                                value="code"
-                                                :rules="columnsRules"
-                                            >
-                                                <template v-slot:label>
-                                                    <div class="caption">
-                                                        C&oacute;digo
-                                                    </div>
-                                                </template>
-                                            </v-checkbox>
                                             <v-checkbox 
                                                 color="info"
                                                 v-model="columns"
-                                                value="dateCol"
+                                                :value='column'
                                                 :rules="columnsRules"
                                             >
                                                 <template v-slot:label>
                                                     <div class="caption">
-                                                        Fecha
-                                                    </div>
-                                                </template>
-                                            </v-checkbox>
-                                            <v-checkbox 
-                                                color="info"
-                                                v-model="columns"
-                                                value="phone"
-                                                :rules="columnsRules"
-                                            >
-                                                <template v-slot:label>
-                                                    <div class="caption">
-                                                        Tel&eacute;fono
-                                                    </div>
-                                                </template>
-                                            </v-checkbox>
-                                        </v-col>
-                         
-                                        <v-col
-                                            cols="12"
-                                            sm="4"
-                                            md="4"
-                                        >
-                                            <v-checkbox
-                                                color="info"
-                                                v-model="columns"
-                                                value="question1"
-                                                :rules="columnsRules"
-
-                                            >
-                                                <template v-slot:label>
-                                                    <div class="caption">
-                                                        Pregunta 1
-                                                    </div>
-                                                </template>
-                                            </v-checkbox>
-
-                                            <v-checkbox 
-                                                color="info"
-                                                v-model="columns"
-                                                value="question2"
-                                                :rules="columnsRules"
-                                            >
-                                                <template v-slot:label>
-                                                    <div class="caption">
-                                                        Pregunta 2
-                                                    </div>
-                                                </template>
-                                            </v-checkbox>
-                                        </v-col>
-                              
-                                        <v-col
-                                            cols="12"
-                                            sm="4"
-                                            md="4"
-                                        >
-                                            <v-checkbox
-                                                color="info"
-                                                v-model="columns"
-                                                value="question3"
-                                                :rules="columnsRules"
-                                            >
-                                                <template v-slot:label>
-                                                    <div class="caption">
-                                                        Pregunta 3
-                                                    </div>
-                                                </template>
-                                            </v-checkbox>
-                                            <v-checkbox 
-                                                color="info"
-                                                v-model="columns"
-                                                value="registerCode"
-                                                :rules="columnsRules"
-                                            >
-                                                <template v-slot:label>
-                                                    <div class="caption">
-                                                        C&oacute;digo registro
+                                                        {{ column }}
                                                     </div>
                                                 </template>
                                             </v-checkbox>
@@ -266,13 +177,17 @@ export default {
         allColumns: true,
         modal: false,
         columns: [],
+        columnsLoad: [],
         dateRules: [
             v => (Array.isArray(v) && v.length > 1) || 'El rango de fechas es requerido'
         ],
     }),
 
-    computed: {       
-
+    computed: {
+               
+        /**
+         * Se encarga de las reglas de los checkbox
+         */
         columnsRules() {
             const rules = []
 
@@ -294,16 +209,60 @@ export default {
 
     methods: {
 
+        /**
+         * Valida que el formulario este ok y envia los datos
+         */
         validate () {
-           this.$refs.form.validate()
+            if (this.$refs.form.validate()) {
+
+                axios.post('/excelDownload', {
+                    date: this.date,
+                    allColumns: this.allColumns,
+                    columns: this.columns
+                })
+                
+                .then( (response) => {
+                    console.log(response)
+                })
+
+                .catch( (error) => {
+                    console.log(error)
+                })
+            }
         },
 
+        /**
+         *  Cuando el checkbox todos los campos sea false se ejecuta
+         *  Limpiando el panel y el arreglo
+         */
         checkAllColumn() {
+
             if (this.allColumns != !this.allColumns) {
                 this.panel = []
                 this.columns = []
             }
+        },
+
+        /**
+         *  Realiza la carga de las columnas en el panel
+         */
+        loadAllColumns() {
+
+            axios.get('/loadColumns')
+
+                .then( (response) => {
+                    [...this.columnsLoad = response.data]
+                })
+
+                .catch( (error) => {
+                    console.log(error)
+                })
+
         }
+    },
+
+    mounted() {
+        this.loadAllColumns()
     }
   
   }
