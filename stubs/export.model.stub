@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Exports;
+namespace DummyNamespace;
 
-use App\Colina;
+use DummyFullModelClass;
 use Maatwebsite\Excel\Concerns\FromCollection;
 
-class ColinaExport implements FromCollection
+class DummyClass implements FromCollection
 {
     /**
     * @return \Illuminate\Support\Collection
     */
-
     public function collection()
     {
-        return Colina::all();
+        return DummyModelClass::all();
     }
 }

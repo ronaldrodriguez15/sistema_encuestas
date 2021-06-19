@@ -11,7 +11,7 @@ class Colina extends Model
      *
      * @var string
     */
-    protected $table = 'colinas';
+    public $table = 'colinas';
 
     /**
      * Indica los atributos que son asginados de forma masiva
@@ -26,4 +26,11 @@ class Colina extends Model
         'codigo_registro',
         'telefono'
     ];
+
+    /**
+     * Indicates if the model should be timestamped.
+     *
+     * @var bool
+     */
+    public $timestamps = false;
 }

@@ -2,8 +2,6 @@
 
 use Illuminate\Support\Facades\Route;
 
-use App\Exports\ColinaExport;
-use Maatwebsite\Excel\Facades\Excel;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -16,6 +14,19 @@ use Maatwebsite\Excel\Facades\Excel;
 */
 
 Route::get('/', function () {
-    // return view('welcome');
-    return Excel::download(new ColinaExport, 'users_colina.xlsx');
+    return view('welcome');
 });
+
+/**
+ * Carga las columnas
+ * en el componente
+ * Colina
+ */
+Route::get('loadColumns', 'ColinaController@loadColumns');
+
+/**
+ * Envia los datos
+ * del componente
+ * Colina
+ */
+Route::get('excelDownload', 'ColinaController@excelDownload');
