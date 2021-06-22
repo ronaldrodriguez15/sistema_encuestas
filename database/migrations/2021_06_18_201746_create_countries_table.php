@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateColinasTable extends Migration
+class CreateCountriesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateColinasTable extends Migration
      */
     public function up()
     {
-        Schema::create('colinas', function (Blueprint $table) {
+        Schema::create('countries', function (Blueprint $table) {
             $table->id('codigo')->unsigned();
             $table->date('date');
             $table->string('pregunta_1', 150);
@@ -21,6 +21,7 @@ class CreateColinasTable extends Migration
             $table->string('pregunta_3', 150);
             $table->integer('codigo_registro');
             $table->string('telefono');
+            $table->timestamps();
         });
     }
 
@@ -31,6 +32,6 @@ class CreateColinasTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('colinas');
+        Schema::dropIfExists('countries');
     }
 }

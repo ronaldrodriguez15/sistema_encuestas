@@ -2,10 +2,10 @@
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
 
-use App\Colina;
+use App\country;
 use Faker\Generator as Faker;
 
-$factory->define(Colina::class, function (Faker $faker) {
+$factory->define(country::class, function (Faker $faker) {
     return [
         'date' => $faker->date($format = 'y-m-d', $max = 'now'),
         'pregunta_1' => $faker->sentence(3),

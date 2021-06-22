@@ -7,7 +7,10 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Exports\ColinaExport;
 use Maatwebsite\Excel\Facades\Excel;
+<<<<<<< HEAD
 use Illuminate\Support\Arr;
+=======
+>>>>>>> 49d3da81fcc3899926b214acec16108be0681f4a
 
 class ColinaController extends Controller
 {

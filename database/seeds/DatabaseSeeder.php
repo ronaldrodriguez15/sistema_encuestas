@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use App\Colina;
+use App\country;
 
 class DatabaseSeeder extends Seeder
 {
@@ -12,13 +13,24 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
+        // seeders colina
         factory(Colina::class)->create([
-            'dato' => 'dato test',
+            'date' => '1979-06-09',
             'pregunta_1' => 'sentencia test 1',
             'pregunta_2' => 'sentencia test 2',
             'pregunta_3' => 'sentencia test 3',
             'telefono' => '123456789',
         ]);
         factory(Colina::class, 19)->create();
+
+        // seeders country
+        factory(Country::class)->create([
+            'date' => '1920-09-12',
+            'pregunta_1' => 'sentencia test 1 country',
+            'pregunta_2' => 'sentencia test 2 country',
+            'pregunta_3' => 'sentencia test 3 country',
+            'telefono' => '123456789',
+        ]);
+        factory(Country::class, 19)->create();
     }
 }
