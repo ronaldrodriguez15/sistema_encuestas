@@ -2111,6 +2111,8 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
 /* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+
+
 function _toConsumableArray(arr) { return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _unsupportedIterableToArray(arr) || _nonIterableSpread(); }
 
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
@@ -2123,15 +2125,10 @@ function _arrayWithoutHoles(arr) { if (Array.isArray(arr)) return _arrayLikeToAr
 
 function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
 
-
-
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
 //
 //
 //
@@ -2374,28 +2371,33 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
       var _this2 = this;
 
       return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var response;
+        var _this2$data, _this2$data2, response;
+
         return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
           while (1) {
             switch (_context.prev = _context.next) {
               case 0:
                 if (!_this2.$refs.form.validate()) {
-                  _context.next = 5;
+                  _context.next = 8;
                   break;
                 }
 
-                _context.next = 3;
+                (_this2$data = _this2.data).push.apply(_this2$data, _toConsumableArray(_this2.date));
+
+                _this2.data.push(_this2.allColumns);
+
+                (_this2$data2 = _this2.data).push.apply(_this2$data2, _toConsumableArray(_this2.columns));
+
+                _context.next = 6;
                 return axios.post('/excelDownload', {
-                  date: _this2.date,
-                  allColumns: _this2.allColumns,
-                  columns: _this2.columns
+                  data: _this2.data
                 });
 
-              case 3:
+              case 6:
                 response = _context.sent;
                 return _context.abrupt("return", response.data);
 
-              case 5:
+              case 8:
               case "end":
                 return _context.stop();
             }
@@ -40942,11 +40944,7 @@ var render = function() {
                     ],
                     1
                   ),
-                  _vm._v(
-                    "\n                " +
-                      _vm._s(_vm.valid) +
-                      "\n                "
-                  ),
+                  _vm._v(" "),
                   _c(
                     "v-container",
                     { staticClass: "py-0 mt-n5" },
@@ -99676,8 +99674,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\sistema_encuestas\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sistema_encuestas\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\encuestaproject\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\encuestaproject\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

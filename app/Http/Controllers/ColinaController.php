@@ -7,10 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Exports\ColinaExport;
 use Maatwebsite\Excel\Facades\Excel;
-<<<<<<< HEAD
 use Illuminate\Support\Arr;
-=======
->>>>>>> 49d3da81fcc3899926b214acec16108be0681f4a
 
 class ColinaController extends Controller
 {
@@ -39,9 +36,17 @@ class ColinaController extends Controller
      * @return response
     */
     public function excelDownload(Request $request) 
-    {
+    {   
+        /**
+         * Aplanamos el array con los datos 
+         * entrantes
+         */
         $dateArray = Arr::collapse($request->all());
-
+        
+        /**
+         * Realiza la extraccion 
+         * de las fechas
+         */
         function extractDate ($array) {
             $date = [];
             $arrayReverse = array_reverse($array);
@@ -54,26 +59,40 @@ class ColinaController extends Controller
             return [$date, $arrayReverse];
         }
 
+        /**
+         * Almacena las fechas
+         * en dos varaibles
+         */
         list($start, $end) = extractDate($dateArray)[0];
 
+
+        /**
+         * Si encuentra en valor true
+         * realiza la consulta de 
+         * todos los campos
+         */
         if (in_array("true", extractDate($dateArray)[1])) {
-            $Colina = Colina::all();
+            $Colina = Colina::all()
+                    ->whereBetween('date', [$start, $end])
+                    ->values();
             return $Colina->toJson();
+           
         }
+        
+        /**
+         * Extrae el ultimo 
+         * elemento del array
+         */
+        $columns = extractDate($dateArray)[1];
+        array_pop($columns);
+    
+        $Colina = Colina::select(...array_reverse($columns))
+                ->where('date', '>=', $start)
+                ->where('date', '<=', $end)
+                ->get();
 
-
-        dd(extractDate($dateArray)[1]);
-        // rsort($dateArray);
-        // dd($dateArray);
-
-
-        // $colina = Colina::select()
-        //         ->whereBetween();
-
-        // $Colina = Colina::all();
-        // $Colina = Colina::select('pregunta_1')->get();
-
-        // return $Colina->toJson();
+        return $Colina->toJson();
+       
     }
 
 }

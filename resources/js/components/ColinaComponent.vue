@@ -84,9 +84,6 @@
 
                         </v-dialog>
                     </v-col>
-                    {{
-                        valid
-                    }}
                     <v-container class="py-0 mt-n5">
                         <v-checkbox 
                             v-model="allColumns"
@@ -248,18 +245,14 @@ export default {
             
             if (this.$refs.form.validate()) {
 
-                // this.data.push(...this.date)
-                // this.data.push(...this.columns)
-                // this.data.push(this.allColumns)
-
-                // console.log(this.data)
+                this.data.push(...this.date)
+                this.data.push(this.allColumns)
+                this.data.push(...this.columns)
+              
                 const response = await axios.post('/excelDownload', {
-                    date: this.date,
-                    allColumns: this.allColumns,
-                    columns: this.columns
+                    data: this.data,
                 })
 
-                // console.log(response.data)
                 return response.data
             }
             

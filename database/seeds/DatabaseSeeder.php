@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         // seeders colina
         factory(Colina::class)->create([
-            'date' => '1979-06-09',
+            'date' => '2021-06-01',
             'pregunta_1' => 'sentencia test 1',
             'pregunta_2' => 'sentencia test 2',
             'pregunta_3' => 'sentencia test 3',
@@ -25,7 +25,7 @@ class DatabaseSeeder extends Seeder
 
         // seeders country
         factory(Country::class)->create([
-            'date' => '1920-09-12',
+            'date' => '2021-06-01',
             'pregunta_1' => 'sentencia test 1 country',
             'pregunta_2' => 'sentencia test 2 country',
             'pregunta_3' => 'sentencia test 3 country',
