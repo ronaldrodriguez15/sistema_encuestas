@@ -25,6 +25,7 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
+        "vue-json-excel": "^0.3.0",
         "vuetify": "^2.5.4"
     }
 }

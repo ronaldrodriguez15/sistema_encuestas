@@ -84,7 +84,9 @@
 
                         </v-dialog>
                     </v-col>
-                    
+                    {{
+                        valid
+                    }}
                     <v-container class="py-0 mt-n5">
                         <v-checkbox 
                             v-model="allColumns"
@@ -147,14 +149,14 @@
         </v-card-text> 
 
         <v-card-actions >
-            <v-btn
-                :disabled="!valid"
-                color="light-blue darken-1"
-                class="mx-auto body-2 white--text font-weight-bold py-5 rounded-xl px-6"
-                @click="validate"
+            <downloadExcel
+                :class= "valid ? 'buttonDownload' : 'buttonDownload buttonDownloadCancel'"
+                :fetch= "validate"
+                name="Colina.xls"
+    
             >
                 Descargar
-            </v-btn>
+            </downloadExcel>
         </v-card-actions>  
     </div>
 </template>
@@ -163,6 +165,23 @@
 <style scoped>
     .border1 {
         border: 1px solid red;
+    }
+
+    .buttonDownload {
+        background-color: #029be6;
+        padding: 12px 17px;
+        text-transform: uppercase;
+        margin: 0 auto;
+        border-radius: 25px;
+        cursor: pointer;
+        font-weight: bold;
+        color: #ffffff;
+        box-shadow: 0px 6px 6px -3px rgba(0,0,0,0.27);
+    }
+
+    .buttonDownloadCancel {
+        background-color: #e0e0e0;
+        color: #a5a5a5;
     }
 </style>
 
@@ -178,10 +197,22 @@ export default {
         modal: false,
         columns: [],
         columnsLoad: [],
+        data: [],
         dateRules: [
             v => (Array.isArray(v) && v.length > 1) || 'El rango de fechas es requerido'
         ],
+    
     }),
+
+
+    watch: {
+
+        validateForm: function (value) {
+            this.valid = this.$refs.form.validate()
+        }
+
+    },
+
 
     computed: {
                
@@ -209,28 +240,31 @@ export default {
 
     methods: {
 
+
         /**
          * Valida que el formulario este ok y envia los datos
          */
-        validate () {
+        async validate () { 
+            
             if (this.$refs.form.validate()) {
 
-                axios.post('/excelDownload', {
+                // this.data.push(...this.date)
+                // this.data.push(...this.columns)
+                // this.data.push(this.allColumns)
+
+                // console.log(this.data)
+                const response = await axios.post('/excelDownload', {
                     date: this.date,
                     allColumns: this.allColumns,
                     columns: this.columns
                 })
-                
-                .then( (response) => {
-                    console.log(response)
-                })
 
-                .catch( (error) => {
-                    console.log(error)
-                })
+                // console.log(response.data)
+                return response.data
             }
+            
         },
-
+      
         /**
          *  Cuando el checkbox todos los campos sea false se ejecuta
          *  Limpiando el panel y el arreglo

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Colina;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Exports\ColinaExport;
+use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Support\Arr;
 
 class ColinaController extends Controller
 {
@@ -17,7 +20,7 @@ class ColinaController extends Controller
     public function loadColumns()
     {
         $table = new Colina;
-        $consult = DB::select('SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME =  ?',["$table->table"]);
+        $consult = DB::select('SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME =  ?',['colinas']);
         $consultToArray = [];
      
         for ($i=0; $i < count($consult); $i++) { 
@@ -32,9 +35,42 @@ class ColinaController extends Controller
      *
      * @return response
     */
-    public function excelDownload(Request $request) {
+    public function excelDownload(Request $request) 
+    {
+        $dateArray = Arr::collapse($request->all());
 
-        return response()->json($request->all());
+        function extractDate ($array) {
+            $date = [];
+            $arrayReverse = array_reverse($array);
+            for ($i = 0; $i < sizeof($arrayReverse); $i++) {
+                if (sizeof($date) < 2) {
+                    array_push($date, array_pop($arrayReverse));
+                }
+                continue;
+            }
+            return [$date, $arrayReverse];
+        }
+
+        list($start, $end) = extractDate($dateArray)[0];
+
+        if (in_array("true", extractDate($dateArray)[1])) {
+            $Colina = Colina::all();
+            return $Colina->toJson();
+        }
+
+
+        dd(extractDate($dateArray)[1]);
+        // rsort($dateArray);
+        // dd($dateArray);
+
+
+        // $colina = Colina::select()
+        //         ->whereBetween();
+
+        // $Colina = Colina::all();
+        // $Colina = Colina::select('pregunta_1')->get();
+
+        // return $Colina->toJson();
     }
 
 }

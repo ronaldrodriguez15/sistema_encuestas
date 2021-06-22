@@ -11,7 +11,7 @@ class Colina extends Model
      *
      * @var string
     */
-    public $table = 'colinas';
+    protected $table = 'colinas';
 
     /**
      * Indica los atributos que son asginados de forma masiva
