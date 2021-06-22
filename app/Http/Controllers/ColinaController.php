@@ -59,10 +59,7 @@ class ColinaController extends Controller
             return [$date, $arrayReverse];
         }
 
-        /**
-         * Almacena las fechas
-         * en dos varaibles
-         */
+        // Almacena las fechas en dos varaibles
         list($start, $end) = extractDate($dateArray)[0];
 
 
@@ -75,8 +72,7 @@ class ColinaController extends Controller
             $Colina = Colina::all()
                     ->whereBetween('date', [$start, $end])
                     ->values();
-            return $Colina->toJson();
-           
+            return $Colina->toJson();  
         }
         
         /**
