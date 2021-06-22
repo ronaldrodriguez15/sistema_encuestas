@@ -36,9 +36,9 @@ class ColinaController extends Controller
     */
     public function excelDownload(Request $request) {
 
-        $export = New ColinaExport($request);
-        // return response()->json($request->all());
-        $dataExcel = Excel::download(new ColinaExport, 'colina-excel.xlsx');
+        Excel::download(new ColinaExport, 'colina-excel.xlsx');
+
+        // return response()->download(storage_path('storage/framework/laravel-excel/colina-excel.xlsx'));
         
     }
 

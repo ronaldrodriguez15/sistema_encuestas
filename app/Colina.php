@@ -19,7 +19,7 @@ class Colina extends Model
      * @var array
     */
     protected $fillable = [
-        'dato',
+        'date',
         'pregunta_1',
         'pregunta_2',
         'pregunta_3',

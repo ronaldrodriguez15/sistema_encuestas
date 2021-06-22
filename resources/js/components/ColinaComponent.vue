@@ -262,7 +262,7 @@ export default {
     },
 
     mounted() {
-        this.loadAllColumns(),
+        this.loadAllColumns()
     }
   
   }

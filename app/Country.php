@@ -6,14 +6,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Country extends Model
 {
-    protected $table = 'countries';
+    public $table = 'countries';
 
     protected $fillable = [
-        'dato',
+        'date',
         'pregunta_1',
         'pregunta_2',
         'pregunta_3',
         'codigo_registro',
         'telefono'
     ];
+
+    public $timestamps = false;
 }

@@ -29,4 +29,4 @@ Route::get('loadColumns', 'ColinaController@loadColumns');
  * del componente
  * Colina
  */
-Route::get('excelDownload', 'ColinaController@excelDownload');
+Route::post('excelDownload', 'ColinaController@excelDownload');

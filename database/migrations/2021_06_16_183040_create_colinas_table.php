@@ -15,7 +15,7 @@ class CreateColinasTable extends Migration
     {
         Schema::create('colinas', function (Blueprint $table) {
             $table->id('codigo')->unsigned();
-            $table->string('dato', 100);
+            $table->date('date');
             $table->string('pregunta_1', 150);
             $table->string('pregunta_2', 150);
             $table->string('pregunta_3', 150);
