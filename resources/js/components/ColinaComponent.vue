@@ -81,7 +81,7 @@
                                     OK
                                 </v-btn>
                             </v-date-picker>
-
+                            
                         </v-dialog>
                     </v-col>
                     
@@ -147,11 +147,10 @@
         </v-card-text> 
 
         <v-card-actions >
-            <v-btn
-                :disabled="!valid"
-                color="light-blue darken-1"
-                class="mx-auto body-2 white--text font-weight-bold py-5 rounded-xl px-6"
-                @click="validate"
+            <downloadExcel
+                :class= "valid ? 'buttonDownload' : 'buttonDownload buttonDownloadCancel'"
+                :fetch= "validate"
+                name="Colina.xls"
             >
                 Descargar
             </v-btn>
@@ -225,9 +224,14 @@ export default {
                     console.log(response)
                 })
 
-                .catch( (error) => {
-                    console.log(error)
-                })
+
+                if (response.status === 200) {
+                    this.data = []
+                    Vue.swal('Hello Vue world!!!');
+                }
+            
+                console.log(response)
+                return response.data
             }
         },
 
