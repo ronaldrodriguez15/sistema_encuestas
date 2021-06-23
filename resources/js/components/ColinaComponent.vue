@@ -81,7 +81,7 @@
                                     OK
                                 </v-btn>
                             </v-date-picker>
-
+                            
                         </v-dialog>
                     </v-col>
                     <v-container class="py-0 mt-n5">
@@ -150,7 +150,6 @@
                 :class= "valid ? 'buttonDownload' : 'buttonDownload buttonDownloadCancel'"
                 :fetch= "validate"
                 name="Colina.xls"
-    
             >
                 Descargar
             </downloadExcel>
@@ -253,6 +252,13 @@ export default {
                     data: this.data,
                 })
 
+
+                if (response.status === 200) {
+                    this.data = []
+                    Vue.swal('Hello Vue world!!!');
+                }
+            
+                console.log(response)
                 return response.data
             }
             
