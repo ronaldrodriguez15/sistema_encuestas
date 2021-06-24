@@ -3,6 +3,7 @@
 use Illuminate\Database\Seeder;
 use App\Colina;
 use App\country;
+use App\Rol;
 
 class DatabaseSeeder extends Seeder
 {
@@ -32,5 +33,7 @@ class DatabaseSeeder extends Seeder
             'telefono' => '123456789',
         ]);
         factory(Country::class, 19)->create();
+
+
     }
 }

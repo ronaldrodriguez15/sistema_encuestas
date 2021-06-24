@@ -2308,10 +2308,6 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: 'ColinaComponent',
   data: function data() {
@@ -2330,6 +2326,10 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
     };
   },
   watch: {
+    /**
+     * Se encarga de asignar el valor del formulario
+     * a la propiedad
+     */
     validateForm: function validateForm(value) {
       this.valid = this.$refs.form.validate();
     }
@@ -2397,10 +2397,20 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (response.status === 200) {
                   _this2.data = [];
-                  Vue.swal('Hello Vue world!!!');
                 }
 
-                console.log(response);
+                if (response.data.length === 0) {
+                  Vue.swal({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: '¡No hay registros con ese rango de fechas!',
+                    showConfirmButton: false,
+                    showCloseButton: false,
+                    allowOutsideClick: true,
+                    keydownListenerCapture: true
+                  });
+                }
+
                 return _context.abrupt("return", response.data);
 
               case 10:
@@ -7272,7 +7282,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.border1[data-v-7285bc34] {\n    border: 1px solid red;\n}\n.buttonDownload[data-v-7285bc34] {\n    background-color: #029be6;\n    padding: 12px 17px;\n    text-transform: uppercase;\n    margin: 0 auto;\n    border-radius: 25px;\n    cursor: pointer;\n    font-weight: bold;\n    color: #ffffff;\n    box-shadow: 0px 6px 6px -3px rgba(0,0,0,0.27);\n}\n.buttonDownloadCancel[data-v-7285bc34] {\n    background-color: #e0e0e0;\n    color: #a5a5a5;\n}\n", ""]);
+exports.push([module.i, "\n.buttonDownload[data-v-7285bc34] {\n    background-color: #029be6;\n    padding: 12px 17px;\n    text-transform: uppercase;\n    margin: 0 auto;\n    border-radius: 25px;\n    cursor: pointer;\n    font-weight: bold;\n    color: #ffffff;\n    box-shadow: 0px 6px 6px -3px rgba(0,0,0,0.27);\n}\n.buttonDownloadCancel[data-v-7285bc34] {\n    background-color: #e0e0e0;\n    color: #a5a5a5;\n}\n", ""]);
 
 // exports
 
