@@ -2325,7 +2325,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
      * Valida que el formulario este ok y envia los datos
      */
     validate: function validate() {
-<<<<<<< HEAD
       if (this.$refs.form.validate()) {
         axios.post('/excelDownload', {
           date: this.date,
@@ -2333,55 +2332,16 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
           columns: this.columns
         }).then(function (response) {
           console.log(response);
-        })["catch"](function (error) {
-          console.log(error);
         });
+
+        if (response.status === 200) {
+          this.data = [];
+          Vue.swal('Hello Vue world!!!');
+        }
+
+        console.log(response);
+        return response.data;
       }
-=======
-      var _this2 = this;
-
-      return _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.mark(function _callee() {
-        var _this2$data, _this2$data2, response;
-
-        return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.wrap(function _callee$(_context) {
-          while (1) {
-            switch (_context.prev = _context.next) {
-              case 0:
-                if (!_this2.$refs.form.validate()) {
-                  _context.next = 10;
-                  break;
-                }
-
-                (_this2$data = _this2.data).push.apply(_this2$data, _toConsumableArray(_this2.date));
-
-                _this2.data.push(_this2.allColumns);
-
-                (_this2$data2 = _this2.data).push.apply(_this2$data2, _toConsumableArray(_this2.columns));
-
-                _context.next = 6;
-                return axios.post('/excelDownload', {
-                  data: _this2.data
-                });
-
-              case 6:
-                response = _context.sent;
-
-                if (response.status === 200) {
-                  _this2.data = [];
-                  Vue.swal('Hello Vue world!!!');
-                }
-
-                console.log(response);
-                return _context.abrupt("return", response.data);
-
-              case 10:
-              case "end":
-                return _context.stop();
-            }
-          }
-        }, _callee);
-      }))();
->>>>>>> 2c31ff04d2aff78de39284d7b6ad9dacc1e60ea1
     },
 
     /**
@@ -44015,12 +43975,12 @@ var render = function() {
         "v-card-actions",
         [
           _c(
-            "v-btn",
+            "downloadExcel",
             {
-              staticClass:
-                "mx-auto body-2 white--text font-weight-bold py-5 rounded-xl px-6",
-              attrs: { disabled: !_vm.valid, color: "light-blue darken-1" },
-              on: { click: _vm.validate }
+              class: _vm.valid
+                ? "buttonDownload"
+                : "buttonDownload buttonDownloadCancel",
+              attrs: { fetch: _vm.validate, name: "Colina.xls" }
             },
             [_vm._v("\n            Descargar\n        ")]
           )
@@ -75647,7 +75607,7 @@ var baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_11__["default"])(_
       default: 'primary'
     },
     disabled: Boolean,
-    group: String,
+    group: [String, RegExp],
     noAction: Boolean,
     prependIcon: String,
     ripple: {
@@ -80340,7 +80300,7 @@ var baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_14__["default"])(_
           'aria-readonly': String(this.isReadonly),
           'aria-activedescendant': Object(_util_helpers__WEBPACK_IMPORTED_MODULE_12__["getObjectValueByPath"])(this.$refs.menu, 'activeTile.id'),
           autocomplete: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_12__["getObjectValueByPath"])(input.data, 'attrs.autocomplete', 'off'),
-          placeholder: !this.isDirty && (this.isFocused || !this.hasLabel) ? this.placeholder : undefined
+          placeholder: !this.isDirty && (this.persistentPlaceholder || this.isFocused || !this.hasLabel) ? this.placeholder : undefined
         },
         on: {
           keypress: this.onKeyPress
@@ -91107,7 +91067,7 @@ function () {
 
   Vuetify.install = _install__WEBPACK_IMPORTED_MODULE_0__["install"];
   Vuetify.installed = false;
-  Vuetify.version = "2.5.4";
+  Vuetify.version = "2.5.5";
   Vuetify.config = {
     silent: false
   };
@@ -97232,6 +97192,7 @@ var __assign = undefined && undefined.__assign || function () {
       type: Boolean,
       default: undefined
     },
+    exactPath: Boolean,
     exactActiveClass: String,
     link: Boolean,
     href: [String, Object],
@@ -97321,6 +97282,7 @@ var __assign = undefined && undefined.__assign || function () {
         Object.assign(data.props, {
           to: this.to,
           exact: exact,
+          exactPath: this.exactPath,
           activeClass: activeClass,
           exactActiveClass: exactActiveClass,
           append: this.append,

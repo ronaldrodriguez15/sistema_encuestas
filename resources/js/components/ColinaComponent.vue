@@ -153,7 +153,7 @@
                 name="Colina.xls"
             >
                 Descargar
-            </v-btn>
+            </downloadExcel>
         </v-card-actions>  
     </div>
 </template>
