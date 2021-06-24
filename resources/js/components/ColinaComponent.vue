@@ -255,7 +255,9 @@ export default {
 
                 if (response.status === 200) {
                     this.data = []
-                    Vue.swal('Hello Vue world!!!');
+                    Vue.swal('Tu descarga ha comenzado.');
+                } else {
+                    Vue.swal('No se encuentran registros en ese rango de fechas.');
                 }
             
                 console.log(response)

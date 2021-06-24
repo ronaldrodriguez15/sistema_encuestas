@@ -2397,7 +2397,9 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
                 if (response.status === 200) {
                   _this2.data = [];
-                  Vue.swal('Hello Vue world!!!');
+                  Vue.swal('Tu descarga ha comenzado.');
+                } else {
+                  Vue.swal('No se encuentran registros en ese rango de fechas.');
                 }
 
                 console.log(response);
