@@ -159,10 +159,6 @@
 
 
 <style scoped>
-    .border1 {
-        border: 1px solid red;
-    }
-
     .buttonDownload {
         background-color: #029be6;
         padding: 12px 17px;
@@ -203,6 +199,10 @@ export default {
 
     watch: {
 
+        /**
+         * Se encarga de asignar el valor del formulario
+         * a la propiedad
+         */
         validateForm: function (value) {
             this.valid = this.$refs.form.validate()
         }
@@ -252,15 +252,22 @@ export default {
                     data: this.data,
                 })
 
-
                 if (response.status === 200) {
-                    this.data = []
-                    Vue.swal('Tu descarga ha comenzado.');
-                } else {
-                    Vue.swal('No se encuentran registros en ese rango de fechas.');
+                    this.data = []    
                 }
-            
-                console.log(response)
+
+                if (response.data.length === 0) {
+                    Vue.swal({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: '¡No hay registros con ese rango de fechas!',
+                        showConfirmButton: false,
+                        showCloseButton: false,
+                        allowOutsideClick: true,
+                        keydownListenerCapture: true,
+                    });
+                }
+
                 return response.data
             }
             

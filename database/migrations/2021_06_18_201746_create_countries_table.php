@@ -21,7 +21,6 @@ class CreateCountriesTable extends Migration
             $table->string('pregunta_3', 150);
             $table->integer('codigo_registro');
             $table->string('telefono');
-            $table->timestamps();
         });
     }
 
