@@ -11,7 +11,7 @@ class Country extends Model
      *
      * @var string
     */
-    protected $table = 'countries';
+    protected $table = 'contries';
 
     /**
      * Indica los atributos que son asginados de forma masiva

@@ -284,7 +284,7 @@ export default {
         .get("/loadColumnsCountry")
 
         .then((response) => {
-          [...(this.columnsLoad = response.data)];
+          [...this.columnsLoad = response.data];
         })
         .catch((error) => {
           console.log(error);

@@ -7348,7 +7348,7 @@ exports = module.exports = __webpack_require__(/*! ../../../node_modules/css-loa
 
 
 // module
-exports.push([module.i, "\n.buttonDownload[data-v-122c44f2] {\n  background-color: #029be6;\n  padding: 12px 17px;\n  text-transform: uppercase;\n  margin: 0 auto;\n  border-radius: 25px;\n  cursor: pointer;\n  font-weight: bold;\n  color: #ffffff;\n  box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.27);\n}\n.buttonDownloadCancel[data-v-122c44f2] {\n  background-color: #e0e0e0;\n  color: #a5a5a5;\n}\n", ""]);
+exports.push([module.i, "\n.buttonDownload[data-v-122c44f2] {\r\n  background-color: #029be6;\r\n  padding: 12px 17px;\r\n  text-transform: uppercase;\r\n  margin: 0 auto;\r\n  border-radius: 25px;\r\n  cursor: pointer;\r\n  font-weight: bold;\r\n  color: #ffffff;\r\n  box-shadow: 0px 6px 6px -3px rgba(0, 0, 0, 0.27);\n}\n.buttonDownloadCancel[data-v-122c44f2] {\r\n  background-color: #e0e0e0;\r\n  color: #a5a5a5;\n}\r\n", ""]);
 
 // exports
 
@@ -76240,7 +76240,7 @@ var baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_11__["default"])(_
       default: 'primary'
     },
     disabled: Boolean,
-    group: [String, RegExp],
+    group: String,
     noAction: Boolean,
     prependIcon: String,
     ripple: {
@@ -80933,7 +80933,7 @@ var baseMixins = Object(_util_mixins__WEBPACK_IMPORTED_MODULE_14__["default"])(_
           'aria-readonly': String(this.isReadonly),
           'aria-activedescendant': Object(_util_helpers__WEBPACK_IMPORTED_MODULE_12__["getObjectValueByPath"])(this.$refs.menu, 'activeTile.id'),
           autocomplete: Object(_util_helpers__WEBPACK_IMPORTED_MODULE_12__["getObjectValueByPath"])(input.data, 'attrs.autocomplete', 'off'),
-          placeholder: !this.isDirty && (this.persistentPlaceholder || this.isFocused || !this.hasLabel) ? this.placeholder : undefined
+          placeholder: !this.isDirty && (this.isFocused || !this.hasLabel) ? this.placeholder : undefined
         },
         on: {
           keypress: this.onKeyPress
@@ -91700,7 +91700,7 @@ function () {
 
   Vuetify.install = _install__WEBPACK_IMPORTED_MODULE_0__["install"];
   Vuetify.installed = false;
-  Vuetify.version = "2.5.5";
+  Vuetify.version = "2.5.4";
   Vuetify.config = {
     silent: false
   };
@@ -97825,7 +97825,6 @@ var __assign = undefined && undefined.__assign || function () {
       type: Boolean,
       default: undefined
     },
-    exactPath: Boolean,
     exactActiveClass: String,
     link: Boolean,
     href: [String, Object],
@@ -97915,7 +97914,6 @@ var __assign = undefined && undefined.__assign || function () {
         Object.assign(data.props, {
           to: this.to,
           exact: exact,
-          exactPath: this.exactPath,
           activeClass: activeClass,
           exactActiveClass: exactActiveClass,
           append: this.append,
@@ -103246,8 +103244,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\xampp\htdocs\sistema_encuestas\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\xampp\htdocs\sistema_encuestas\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\laragon\www\encuestaproject\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\laragon\www\encuestaproject\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -17,13 +17,13 @@ class CountryController extends Controller
     public function loadColumns() {
 
         $table = new Country;
-        $consult = DB::select('SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME =  ?',['countries'], [1]);
+        $consult = DB::select('SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME =  ?',['contries']);
         $consultToArray = [];
-
+     
         for ($i=0; $i < count($consult); $i++) { 
             $consultToArray[] = $consult[$i]->COLUMN_NAME;
-        };
-
+        }
+ 
         return response()->json($consultToArray);
     }
 
