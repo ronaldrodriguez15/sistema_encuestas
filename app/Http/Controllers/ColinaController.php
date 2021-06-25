@@ -5,8 +5,6 @@ namespace App\Http\Controllers;
 use App\Colina;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Exports\ColinaExport;
-use Maatwebsite\Excel\Facades\Excel;
 use Illuminate\Support\Arr;
 
 class ColinaController extends Controller
@@ -57,9 +55,9 @@ class ColinaController extends Controller
                 continue;
             }
             return [$date, $arrayReverse];
-        }
+        };
 
-        // Almacena las fechas en dos varaibles
+        // Almacena las fechas en dos variables
         list($start, $end) = extractDate($dateArray)[0];
 
 
@@ -86,7 +84,6 @@ class ColinaController extends Controller
                 ->where('date', '>=', $start)
                 ->where('date', '<=', $end)
                 ->get();
-
         return $Colina->toJson();
        
     }

@@ -17,13 +17,12 @@ Route::get('/', function () {
 /**
  * Carga las columnas
  * en el componente
- * Colina
  */
-Route::get('loadColumns', 'ColinaController@loadColumns');
-
+Route::get('loadColumnsColina', 'ColinaController@loadColumns');
+Route::get('loadColumnsCountry', 'CountryController@loadColumns');
 /**
  * Envia los datos
  * del componente
- * Colina
  */
-Route::post('excelDownload', 'ColinaController@excelDownload');
+Route::post('excelDownloadColina', 'ColinaController@excelDownload');
+Route::post('excelDownloadCountry', 'CountryController@excelDownload');

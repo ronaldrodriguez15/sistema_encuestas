@@ -11,7 +11,7 @@
             text--darken-4 text--accent-3
           "
         >
-          Descarga de encuestas <strong>ECY Colinas </strong>
+          Descarga de encuestas <strong>ECY Contry </strong>
         </h1>
         <div
           style="
@@ -28,7 +28,7 @@
       <div class="mt-6 caption text-center">
         <p>
           Realiza la descarga de las encuestas del
-          <strong>ECY Colinas</strong>
+          <strong>ECY Contry</strong>
           a trav&eacute;s de este formulario.
         </p>
       </div>
@@ -139,7 +139,7 @@
         "
         :fetch="validate"
         :before-finish="finishDownload"
-        name="Colina.xls"
+        name="Country.xls"
       >
         Descargar
       </downloadExcel>
@@ -169,7 +169,7 @@
 
 <script>
 export default {
-  name: "ColinaComponent",
+  name: "CountryComponent",
 
   data: () => ({
     date: new Date().toISOString().substr(0, 10),
@@ -187,8 +187,8 @@ export default {
   }),
 
   watch: {
-    /**
-     * Se encarga de asignar el valor del formulario
+    /*
+     * asigna el valor del formulario
      * a la propiedad
      */
     validateForm: function (value) {
@@ -198,8 +198,9 @@ export default {
 
   computed: {
     /**
-     * Se encarga de las reglas de los checkbox
+     * se encarga de las reglas de los checkbox
      */
+
     columnsRules() {
       const rules = [];
 
@@ -218,10 +219,6 @@ export default {
   },
 
   methods: {
-    /**
-     * se genera un mensaje confirmando la
-     * descarga del archivo
-     */
     finishDownload() {
       Vue.swal({
         icon: "success",
@@ -233,8 +230,10 @@ export default {
         timer: 3000
       });
     },
+
     /**
-     * Valida que el formulario este ok y envia los datos
+     * valida el formulario y posteriormente
+     * envia los datos
      */
     async validate() {
       if (this.$refs.form.validate()) {
@@ -242,11 +241,11 @@ export default {
         this.data.push(this.allColumns);
         this.data.push(...this.columns);
 
-        const response = await axios.post("/excelDownloadColina", {
+        const response = await axios.post("/excelDownloadCountry", {
           data: this.data,
         });
 
-        if (response.status === 200) {
+        if (response.status == 200) {
           this.data = [];
         }
 
@@ -259,17 +258,16 @@ export default {
             showCloseButton: false,
             allowOutsideClick: true,
             keydownListenerCapture: true,
-            timer:3000
+            timer: 3000
           });
         }
-
         return response.data;
       }
     },
 
     /**
-     *  Cuando el checkbox todos los campos sea false se ejecuta
-     *  Limpiando el panel y el arreglo
+     * si los campos y checkboxs son false el arreglo
+     * y el panel se limpian
      */
     checkAllColumn() {
       if (this.allColumns != !this.allColumns) {
@@ -279,16 +277,15 @@ export default {
     },
 
     /**
-     *  Realiza la carga de las columnas en el panel
+     * carga las columnas en el panel
      */
     loadAllColumns() {
       axios
-        .get("/loadColumnsColina")
+        .get("/loadColumnsCountry")
 
         .then((response) => {
           [...(this.columnsLoad = response.data)];
         })
-
         .catch((error) => {
           console.log(error);
         });

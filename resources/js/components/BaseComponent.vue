@@ -33,7 +33,7 @@
                                     <colina-component></colina-component>
                                 </v-col>
                                 <v-col cols="12" md="6">
-                                    <contry-component></contry-component>
+                                    <country-component></country-component>
                                 </v-col>
                             </v-row>
                         </v-card>
@@ -82,13 +82,13 @@
 
 <script>
     import ColinaComponent from './ColinaComponent.vue'
-    import ContryComponent from './ContryComponent.vue'
+    import CountryComponent from './CountryComponent.vue'
 
     export default {
 
         components: {
             ColinaComponent,
-            ContryComponent
+            CountryComponent
         },
     }
 </script>
