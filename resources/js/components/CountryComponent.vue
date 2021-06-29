@@ -219,18 +219,7 @@ export default {
   },
 
   methods: {
-    finishDownload() {
-      Vue.swal({
-        icon: "success",
-        title: "¡Tu descarga ha comenzado!",
-        showConfirmButton: false,
-        showCloseButton: false,
-        allowOutsideClick: true,
-        keydownListenerCapture: true,
-        timer: 3000
-      });
-    },
-
+    
     /**
      * valida el formulario y posteriormente
      * envia los datos
@@ -258,11 +247,27 @@ export default {
             showCloseButton: false,
             allowOutsideClick: true,
             keydownListenerCapture: true,
-            timer: 3000
+            timer: 1500
           });
         }
         return response.data;
       }
+    },
+
+    /**
+     * se genera un mensaje confirmando la
+     * descarga del archivo
+     */
+    finishDownload() {
+      Vue.swal({
+        icon: "success",
+        title: "¡Tu descarga ha comenzado!",
+        showConfirmButton: false,
+        showCloseButton: false,
+        allowOutsideClick: true,
+        keydownListenerCapture: true,
+        timer: 1500
+      });
     },
 
     /**

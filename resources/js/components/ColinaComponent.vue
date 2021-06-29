@@ -184,6 +184,9 @@ export default {
       (v) =>
         (Array.isArray(v) && v.length > 1) || "El rango de fechas es requerido",
     ],
+    Toast: [
+
+    ]
   }),
 
   watch: {
@@ -218,21 +221,7 @@ export default {
   },
 
   methods: {
-    /**
-     * se genera un mensaje confirmando la
-     * descarga del archivo
-     */
-    finishDownload() {
-      Vue.swal({
-        icon: "success",
-        title: "¡Tu descarga ha comenzado!",
-        showConfirmButton: false,
-        showCloseButton: false,
-        allowOutsideClick: true,
-        keydownListenerCapture: true,
-        timer: 3000
-      });
-    },
+  
     /**
      * Valida que el formulario este ok y envia los datos
      */
@@ -259,12 +248,28 @@ export default {
             showCloseButton: false,
             allowOutsideClick: true,
             keydownListenerCapture: true,
-            timer:3000
+            timer:1500
           });
         }
 
         return response.data;
       }
+    },
+
+    /**
+     * se genera un mensaje confirmando la
+     * descarga del archivo
+     */
+    finishDownload() {
+      Vue.swal({
+        icon: "success",
+        title: "¡Tu descarga ha comenzado!",
+        showConfirmButton: false,
+        showCloseButton: false,
+        allowOutsideClick: true,
+        keydownListenerCapture: true,
+        timer: 1500
+      });
     },
 
     /**
@@ -293,6 +298,8 @@ export default {
           console.log(error);
         });
     },
+
+    
   },
 
   mounted() {

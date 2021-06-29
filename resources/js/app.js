@@ -6,7 +6,7 @@ import Vuetify from 'vuetify'
 import '@mdi/font/css/materialdesignicons.css' 
 import JsonExcel from "vue-json-excel";
 import VueSweetalert2 from 'vue-sweetalert2';
-import 'sweetalert2/dist/sweetalert2.min.css';
+
 
 Vue.use(Vuetify);
 Vue.use(VueSweetalert2);
@@ -25,3 +25,4 @@ const app = new Vue({
     }),
 
 });
+
