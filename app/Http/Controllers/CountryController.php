@@ -16,7 +16,6 @@ class CountryController extends Controller
      */
     public function loadColumns() {
 
-        $table = new Country;
         $consult = DB::select('SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME =  ?',['contries']);
         $consultToArray = [];
      

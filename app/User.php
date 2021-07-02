@@ -25,4 +25,11 @@ class User extends Authenticatable
     protected $fillable = [
         'nombre', 'numero_documento', 'codigo_usercrm', 'rol_usercrm'
     ];
+
+    /**
+     * Indica la base de datos para la conexion
+     *
+     * @var string
+    */
+    protected $connection = 'mysql';
 }

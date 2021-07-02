@@ -63,6 +63,39 @@ return [
             ]) : [],
         ],
 
+
+        'master_connection' => [
+            'driver' => 'mysql',
+            'host' => env('MASTER_DB_HOST', '127.0.0.1'),
+            'port' => env('MASTER_DB_PORT', '3306'),
+            'database' => env('MASTER_DB_DATABASE', 'forge'),
+            'username' => env('MASTER_DB_USERNAME', 'forge'),
+            'password' => env('MASTER_DB_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,  
+        ],
+
+        'vicidial_host_connection' => [
+            'driver' => 'mysql',
+            'host' => env('VICIDIAL_DB_HOST', '127.0.0.1'),
+            'port' => env('VICIDIAL_DB_PORT', '3306'),
+            'database' => env('VICIDIAL_DB_DATABASE', 'forge'),
+            'username' => env('VICIDIAL_DB_USERNAME', 'forge'),
+            'password' => env('VICIDIAL_DB_PASSWORD', ''),
+            'unix_socket' => env('DB_SOCKET', ''),
+            'charset' => 'utf8mb4',
+            'collation' => 'utf8mb4_unicode_ci',
+            'prefix' => '',
+            'prefix_indexes' => true,
+            'strict' => true,
+            'engine' => null,  
+        ],
+
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

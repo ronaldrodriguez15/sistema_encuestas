@@ -33,4 +33,11 @@ class Colina extends Model
      * @var bool
      */
     public $timestamps = false;
+
+    /**
+     * Indica la base de datos para la conexion
+     *
+     * @var string
+    */
+    protected $connection = 'vicidial_host_connection';
 }

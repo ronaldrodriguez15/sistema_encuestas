@@ -17,10 +17,9 @@ class ColinaController extends Controller
     */
     public function loadColumns()
     {
-        $table = new Colina;
         $consult = DB::select('SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME =  ?',['colinas']);
         $consultToArray = [];
-     
+    
         for ($i=0; $i < count($consult); $i++) { 
             $consultToArray[] = $consult[$i]->COLUMN_NAME;
         }
